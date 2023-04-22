@@ -6,8 +6,10 @@
     "build": "lerna run build --stream",
     "test": "lerna run test --stream",
     "lint": "eslint ./packages/** --ext .ts --quiet --cache --cache-location \".eslintcache/\"",
-    "service-start": "(cd packages/stock-service; yarn start)",
-    "api-start": "(cd packages/stock-api; yarn start)"
+    "dev-service": "(cd packages/stock-service; yarn dev)",
+    "start-service": "(cd packages/stock-service; yarn start)",
+    "start-api": "(cd packages/stock-api; yarn start)",
+    "dev-api": "(cd packages/stock-api; yarn dev)"
   },
   "dependencies": {
     "@stock/api": "0.0.1",
