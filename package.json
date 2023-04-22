@@ -1,0 +1,28 @@
+{
+  "name": "stock",
+  "version": "0.0.1",
+  "scripts": {
+    "build": "lerna run build --stream",
+    "test": "lerna run test --stream",
+    "lint": "eslint ./packages/** --ext .ts --ext .tsx --quiet --cache --cache-location \".eslintcache/\"",
+    "server-start": "(cd packages/stock-service; yarn start)",
+    "api-start": "(cd packages/stock-api; yarn start)"
+  },
+  "dependencies": {
+    "@stock/api": "0.0.1",
+    "@stock/service": "0.0.1"
+  },
+  "workspaces": [
+    "packages/*"
+  ],
+  "engines": {
+    "node": ">=18.16.0"
+  },
+  "devDependencies": {
+    "@types/node": "^18.15.13",
+    "lerna": "^6.6.1",
+    "ts-node": "10.9.1",
+    "ts-node-dev": "2.0.0",
+    "typescript": "5.0.4"
+  }
+}

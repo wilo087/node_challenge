@@ -1,0 +1,16 @@
+{
+  "name": "@stock/service",
+  "private": true,
+  "scripts": {
+    "dev": "ts-node-dev --respawn --deps ./src",
+    "start": "ts-node --respawn --deps ./src",
+    "start-legacy": "node ./bin/www"
+  },
+  "dependencies": {
+    "debug": "~2.6.9",
+    "express": "4.18.2",
+    "http-errors": "~1.6.3",
+    "morgan": "~1.9.1"
+  },
+  "version": "1.0.0"
+}
