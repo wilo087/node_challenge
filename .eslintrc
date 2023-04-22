@@ -1,0 +1,19 @@
+{
+  "root": true,
+  "extends": [
+    "./node_modules/ts-standard/eslintrc.json"
+  ],
+  "rules": {
+    "@typescript-eslint/dot-notation": [
+      "error"
+    ]
+  },
+  // This option is required for standard-engine to work properly and need to be included in the VSCode settings.json
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "project": "./tsconfig.json"
+  },
+  "plugins": [
+    "@typescript-eslint"
+  ]
+}
