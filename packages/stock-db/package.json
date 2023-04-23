@@ -8,5 +8,11 @@
     "build": "tsc",
     "generate": "prisma generate",
     "migrate": "prisma migrate dev"
+  },
+  "devDependencies": {
+    "prisma": "4.13.0"
+  },
+  "dependencies": {
+    "@prisma/client": "4.13.0"
   }
 }
