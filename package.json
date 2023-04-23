@@ -2,6 +2,12 @@
   "name": "stock",
   "version": "0.0.1",
   "license": "UNLICENSED",
+  "workspaces": [
+    "packages/*"
+  ],
+  "engines": {
+    "node": ">=18.16.0"
+  },
   "scripts": {
     "build": "lerna run build --stream",
     "test": "lerna run test --stream",
@@ -12,14 +18,8 @@
     "dev-api": "(cd packages/stock-api; yarn dev)"
   },
   "dependencies": {
-    "@stock/api": "0.0.1",
+    "@stock/db": "0.0.1",
     "@stock/service": "0.0.1"
-  },
-  "workspaces": [
-    "packages/*"
-  ],
-  "engines": {
-    "node": ">=18.16.0"
   },
   "devDependencies": {
     "@types/node": "^18.15.13",
