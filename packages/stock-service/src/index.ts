@@ -1,8 +1,10 @@
 import express, { Request, Response, NextFunction } from 'express'
 import createError, { HttpError } from 'http-errors'
-import stock from './routes/stock'
 import index from './routes/index'
 import register from './routes/register'
+import stock from './routes/stock'
+import history from './routes/history'
+import stats from './routes/stats'
 
 const app = express()
 app.use(express.json())
@@ -10,6 +12,9 @@ app.use(express.json())
 app.use('/', index)
 app.use('/register', register)
 app.use('/stock', stock)
+app.use('/history', history)
+app.use('/stats', stats)
+
 // TODO: Implement morgan to logger requests
 
 // Catch 404 and forward to error handler
