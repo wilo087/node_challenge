@@ -1,0 +1,20 @@
+version: '3.9'
+
+services:
+  stock.postgres:
+    container_name: stock_postgres
+    networks:
+      - stock_net
+    image: postgres:14.1-alpine3.14
+    # volumes:
+    #   - ./_cache/postgres:/var/lib/postgresql/data
+    environment:
+      POSTGRES_PASSWORD: 'passwd'
+      POSTGRES_USER: postgres
+      POSTGRES_DB: 'jobsity_stock'
+      PGDATA: '/var/lib/postgresql/data'
+    ports:
+      - 5432:5432
+networks:
+  stock_net:
+    name: stock_net
