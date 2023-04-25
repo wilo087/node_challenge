@@ -2,7 +2,9 @@ import { Response, NextFunction } from 'express'
 import jwt from 'jsonwebtoken'
 import dotenv from 'dotenv'
 import { config } from '../config'
-import { AuthenticatedRequest } from '../types'
+import { AuthenticatedRequest, UserJwtPayload } from '../types'
+import db from '@stock/db'
+// import { Role } from '@stock/db/types'
 
 dotenv.config()
 
@@ -14,14 +16,20 @@ export const auth = (req: AuthenticatedRequest, res: Response, next: NextFunctio
     return
   }
 
-  jwt.verify(token, config.secret, (err, decoded) => {
+  jwt.verify(token, config.secret, async (err: Error | null, decoded: UserJwtPayload | any) => {
     if (err != null) {
       res.status(401).json({ error: 'Invalid token' })
       return
     }
 
-    req.userRole = 'user'
-    req.user = decoded
+    const user = await db.User.findUnique({ where: { id: decoded?.userId as number } })
+
+    if (user === null) {
+      res.status(404).json({ error: 'User not found' })
+      return
+    }
+
+    req.user = { ...decoded, userRole: user.role }
     next()
   })
 }

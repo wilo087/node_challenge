@@ -25,7 +25,6 @@ model UserHistory {
   id     Int      @id @default(autoincrement())
   name   String
   symbol String
-  price  Float
   open   Float
   high   Float
   low    Float
