@@ -7,8 +7,8 @@ generator client {
 
 datasource db {
   provider = "postgresql"
-  url      = "postgresql://postgres:passwd@localhost:5432/jobsity_stock?schema=public"
-  // url      = env("DATABASE_URL")
+  // url      = "postgresql://postgres:passwd@localhost:5432/jobsity_stock?schema=public"
+  url      = env("DATABASE_URL")
 }
 
 model User {

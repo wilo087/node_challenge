@@ -1,8 +1,10 @@
-import express, { Request, Response, NextFunction } from 'express'
+import express, { Response } from 'express'
+import { auth } from '../middleware/auth'
+import { AuthenticatedRequest } from '../types'
 const router = express.Router()
 
-router.get('/', (_req: Request, res: Response, _next: NextFunction) => {
-  res.send('Return all users')
+router.get('/', auth, (req: AuthenticatedRequest, res: Response) => {
+  res.json({ message: 'Hello from stats', user: req.user, userRole: req.userRole })
 })
 
 export default router

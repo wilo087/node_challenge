@@ -1,16 +1,13 @@
 import express, { Request, Response, NextFunction } from 'express'
 import createError, { HttpError } from 'http-errors'
-import index from './routes/index'
-import register from './routes/register'
-import stock from './routes/stock'
-import history from './routes/history'
-import stats from './routes/stats'
+import { home, register, stock, history, stats, auth } from './routes'
 
 const app = express()
 app.use(express.json())
 
-app.use('/', index)
+app.use('/', home)
 app.use('/register', register)
+app.use('/auth', auth)
 app.use('/stock', stock)
 app.use('/history', history)
 app.use('/stats', stats)

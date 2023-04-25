@@ -4,6 +4,10 @@
     "./node_modules/ts-standard/eslintrc.json"
   ],
   "rules": {
+    // Turn off the rule to use async/await instead of promises on Express routes
+    "@typescript-eslint/no-misused-promises": [
+      "off"
+    ],
     "@typescript-eslint/dot-notation": [
       "error"
     ]

@@ -1,10 +1,6 @@
-import express from 'express'
-const router = express.Router()
-
-/* GET home page. */
-router.get('/', (_req, res, _next) => {
-  res.send('Welcome to the stock service')
-  // res.render('index', { title: 'Express' })
-})
-
-export default router
+export { default as auth } from './auth'
+export { default as register } from './register'
+export { default as home } from './home'
+export { default as stock } from './stock'
+export { default as history } from './history'
+export { default as stats } from './stats'
