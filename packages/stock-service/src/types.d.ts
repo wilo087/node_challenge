@@ -2,7 +2,7 @@ import { Role } from '@stock/db/types';
 import { Request } from 'express';
 
 export interface UserJwtPayload extends JwtPayload {
-  userId?: string;
+  userId: number;
   userRole: Role;
 }
 

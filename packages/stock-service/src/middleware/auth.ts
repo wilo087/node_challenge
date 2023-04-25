@@ -29,7 +29,7 @@ export const auth = (req: AuthenticatedRequest, res: Response, next: NextFunctio
       return
     }
 
-    req.user = { ...decoded, userRole: user.role }
+    req.user = { userId: user.id, userRole: user.role }
     next()
   })
 }

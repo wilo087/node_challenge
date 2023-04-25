@@ -20,6 +20,7 @@
   "dependencies": {
     "@stock/db": "0.0.1",
     "@stock/service": "0.0.1",
+    "@stock/api": "0.0.1",
     "bcrypt": "5.1.0"
   },
   "devDependencies": {
