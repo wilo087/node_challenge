@@ -4,7 +4,6 @@ import dotenv from 'dotenv'
 import { config } from '../config'
 import { AuthenticatedRequest, UserJwtPayload } from '../types'
 import db from '@stock/db'
-// import { Role } from '@stock/db/types'
 
 dotenv.config()
 
