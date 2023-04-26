@@ -10,7 +10,7 @@ app.use('/register', register)
 app.use('/auth', auth)
 app.use('/stock', stock)
 app.use('/history', history)
-app.use('/stats', stats) // Authenticated route
+app.use('/stats', stats)
 
 // TODO: Implement morgan to logger requests
 

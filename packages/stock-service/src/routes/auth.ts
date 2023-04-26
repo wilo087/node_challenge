@@ -1,5 +1,5 @@
 import express, { Request, Response } from 'express'
-import bcrypt from 'bcrypt'
+import bcryptjs from 'bcryptjs'
 import jwt from 'jsonwebtoken'
 import dotenv from 'dotenv'
 import db from '@stock/db'
@@ -11,6 +11,13 @@ const router = express.Router()
 router.post('/', async (req: Request, res: Response) => {
   try {
     const { email, password } = req.body
+
+    // TODO: Validate email and password with regular expressions
+    if (email === null || password === null) {
+      res.status(400).json({ message: 'Missing email or password' })
+      return
+    }
+
     const user = await db.User.findUnique({ where: { email } })
 
     if (user === null) {
@@ -18,7 +25,7 @@ router.post('/', async (req: Request, res: Response) => {
       return
     }
 
-    const correctPassword = await bcrypt.compare(password, user.password)
+    const correctPassword = await bcryptjs.compare(password, user.password)
     if (!correctPassword) {
       res.status(401).json({ message: 'Invalid password' })
       return

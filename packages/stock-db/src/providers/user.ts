@@ -2,14 +2,14 @@ import { createClient } from '@stock/db/src/client'
 import randomstring from 'randomstring'
 import { Role, User } from '@prisma/client'
 import { UserReturnInput } from '@stock/db/types'
-import bcrypt from 'bcrypt'
+import bcryptjs from 'bcryptjs'
 
 const client = createClient()
 
 client.$use(async (params, next) => {
   if (params.model === 'User' && params.action === 'create') {
     const user = params.args.data as User
-    const encryptedPassword = await bcrypt.hash(user.password, 10)
+    const encryptedPassword = await bcryptjs.hash(user.password, 10)
     user.password = encryptedPassword
   }
 
