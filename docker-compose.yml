@@ -15,6 +15,21 @@ services:
       PGDATA: '/var/lib/postgresql/data'
     ports:
       - 5432:5432
+
+  stock.service:
+    container_name: stock_service
+    networks:
+      - stock_net
+    build:
+      context: .
+      dockerfile: ./docker/service/Dockerfile.dev
+    volumes:
+      - .:/app
+      - /app/node_modules/
+    ports:
+      - 3000:3000
+    # platform: "linux/amd64"
+
 networks:
   stock_net:
     name: stock_net
