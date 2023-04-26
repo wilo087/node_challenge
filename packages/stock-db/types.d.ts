@@ -24,6 +24,11 @@ export interface UserHistory {
   date: number;
 }
 
+export interface UserHistoryResponse {
+  stock: string;
+  times_requested: number;
+}
+
 export type UserCreateInput = Pick<User, 'email' | 'role'>;
 export type UserReturnInput = Pick<User, 'email' | 'password'>;
 // export type UserReturnInput = Omit<User, 'id' | 'role'>;

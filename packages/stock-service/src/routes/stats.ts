@@ -1,10 +1,11 @@
 import express, { Response } from 'express'
 import { auth } from '../middleware/auth'
 import { AuthenticatedRequest } from '../types'
+import db from '@stock/db'
 
 const router = express.Router()
 
-router.get('/', auth, (req: AuthenticatedRequest, res: Response) => {
+router.get('/', auth, async (req: AuthenticatedRequest, res: Response) => {
   const { userRole } = req.user ?? { userRole: 'user' }
 
   if (userRole !== 'admin') {
@@ -12,7 +13,9 @@ router.get('/', auth, (req: AuthenticatedRequest, res: Response) => {
     return
   }
 
-  res.json({ message: 'Hello from stats', user: req.user })
+  const stats = await db.UserHistory.getStats()
+
+  res.json(stats)
 })
 
 export default router
