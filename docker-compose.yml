@@ -4,7 +4,7 @@ services:
   stock.postgres:
     container_name: stock_postgres
     networks:
-      - stock_net
+      - jobsity_stock_net
     image: postgres:14.1-alpine3.14
     # volumes:
     #   - ./_cache/postgres:/var/lib/postgresql/data
@@ -19,29 +19,32 @@ services:
   stock.service:
     container_name: stock_service
     networks:
-      - stock_net
+      - jobsity_stock_net
     build:
       context: .
       dockerfile: ./docker/service/Dockerfile.dev
+    image: jobsity_stock_service
     volumes:
       - .:/app
       - /app/node_modules/
     ports:
       - 3000:3000
+    depends_on:
+      - stock.postgres
+      - stock.api
 
   stock.api:
     container_name: stock_api
     networks:
-      - stock_net
+      - jobsity_stock_net
     build:
       context: .
       dockerfile: ./docker/api/Dockerfile.dev
+    image: jobsity_stock_api
     volumes:
       - .:/app
       - /app/node_modules/
-    # ports:
-    #   - 3001:3001
 
 networks:
-  stock_net:
-    name: stock_net
+  jobsity_stock_net:
+    name: jobsity_stock_net
