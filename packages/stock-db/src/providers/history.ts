@@ -1,9 +1,9 @@
 import { createClient } from '@stock/db/src/client'
-import { UserHistoryResponse } from '@stock/db/types'
+import { UserHistoryResponse, UserStatsResponse } from '@stock/db/types'
 
 const client = createClient()
 
-const getStats = async (): Promise<UserHistoryResponse[]> => {
+const getStats = async (limit: number = 5): Promise<UserStatsResponse[]> => {
   const response = await client.userHistory.groupBy({
     by: ['symbol'],
     _count: {
@@ -14,7 +14,7 @@ const getStats = async (): Promise<UserHistoryResponse[]> => {
         symbol: 'desc'
       }
     },
-    take: 5
+    take: limit
   })
 
   const stats = response.map((item) => {
@@ -27,7 +27,24 @@ const getStats = async (): Promise<UserHistoryResponse[]> => {
   return stats
 }
 
+const getHistory = async (userId: number, limit: number = 20): Promise<UserHistoryResponse[]> => {
+  const data = await client.userHistory.findMany({
+    where: {
+      userId: {
+        equals: userId
+      }
+    },
+    orderBy: {
+      date: 'desc'
+    },
+    take: limit
+  })
+
+  return data
+}
+
 export const provider = {
   ...client.userHistory,
-  getStats
+  getStats,
+  getHistory
 }

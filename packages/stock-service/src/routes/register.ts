@@ -1,37 +1,21 @@
 import express, { Request, Response } from 'express'
-import randomstring from 'randomstring'
 import db from '@stock/db'
-// import { UserReturnInput } from '@stock/db/src/types'
-// import { UserReturnInput } from '@stock/db/src/types'
 
 const router = express.Router()
 
-router.post('/', (req: Request, res: Response) => {
-  // TODO: validate the request
+router.post('/', async (req: Request, res: Response) => {
   const { email, role } = req.body
-  const password = randomstring.generate(32)
 
-  // TODO: Create a provider for find or create user
-  db.User
-    .findUnique({ where: { email } })
+  db.User.findOrCreate(email, role)
     .then((user: any) => {
-      if (user !== null) {
-        res
-          .status(409)
-          .json({ message: 'User already exists' })
+      if (user.password === undefined) {
+        res.status(500).json({ message: 'User name already exist' })
         return
       }
 
-      db.User.create({
-        data: { role, email, password }
-      }).then((user: any) => {
-        res.json({ email: user.email, password })
-      }).catch((err: Error) => {
-        res.json(err)
-      })
-    }).catch((err: Error) => {
-      res.json({ err })
+      res.json(user)
     })
+    .catch((err: Error) => res.json(err))
 })
 
 export default router

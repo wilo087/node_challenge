@@ -1,4 +1,4 @@
-import { Role } from '@stock/db/types';
+import { Role } from '@stock/db/types'
 import { Request } from 'express';
 
 export interface UserJwtPayload extends JwtPayload {

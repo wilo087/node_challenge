@@ -5,7 +5,7 @@ import db from '@stock/db'
 
 const router = express.Router()
 
-router.get('/', auth, async (req: AuthenticatedRequest, res: Response) => {
+router.get('/', auth, (req: AuthenticatedRequest, res: Response) => {
   const { userRole } = req.user ?? { userRole: 'user' }
 
   if (userRole !== 'admin') {
@@ -13,9 +13,9 @@ router.get('/', auth, async (req: AuthenticatedRequest, res: Response) => {
     return
   }
 
-  const stats = await db.UserHistory.getStats()
-
-  res.json(stats)
+  db.UserHistory.getStats(5)
+    .then(stats => res.json(stats))
+    .catch(_err => res.status(500).json({ message: 'Internal server error' }))
 })
 
 export default router

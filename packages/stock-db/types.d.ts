@@ -1,4 +1,4 @@
-export type Role = 'admin' | 'user';
+export type Role = 'admin' | 'user'
 
 export interface User {
   id: number;
@@ -14,21 +14,20 @@ export interface UserHistory {
   id: number;
   name: string;
   symbol: string;
-  price: number;
   open: number;
   high: number;
   low: number;
   close: number;
   user: number;
   userId: number;
-  date: number;
+  date: Date;
 }
 
-export interface UserHistoryResponse {
+export interface UserStatsResponse {
   stock: string;
   times_requested: number;
 }
 
-export type UserCreateInput = Pick<User, 'email' | 'role'>;
-export type UserReturnInput = Pick<User, 'email' | 'password'>;
-// export type UserReturnInput = Omit<User, 'id' | 'role'>;
+export type UserCreateInput = Pick<User, 'email' | 'role'>
+export type UserReturnInput = Pick<User, 'email' | 'password'>
+export type UserHistoryResponse = Omit<UserHistory, 'id' | 'userId' | 'user'>
