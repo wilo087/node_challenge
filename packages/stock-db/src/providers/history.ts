@@ -40,7 +40,19 @@ const getHistory = async (userId: number, limit: number = 20): Promise<UserHisto
     take: limit
   })
 
-  return data
+  const stats = data.map((item) => {
+    return {
+      date: item.date,
+      name: item.name,
+      symbol: item.symbol,
+      open: item.open,
+      high: item.high,
+      low: item.low,
+      close: item.close
+    }
+  })
+
+  return stats
 }
 
 const addHistory = async (userId: number, data: UserHistoryResponse): Promise<void> => {
