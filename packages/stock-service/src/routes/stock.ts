@@ -3,11 +3,11 @@ import { config } from '../config'
 import { auth } from '../middleware/auth'
 import { AuthenticatedRequest } from '../types'
 import db from '@stock/db'
-import { Stock } from '../../../stock-api/src/types'
+import { UserHistoryResponse } from '@stock/db/types'
 const router = express.Router()
 
 router.get('/:code', auth, async (req: AuthenticatedRequest, res: Response) => {
-  const userId = req.user?.userId
+  const userId = req.user?.userId as number
   const { code } = req.params
 
   try {
@@ -18,15 +18,8 @@ router.get('/:code', auth, async (req: AuthenticatedRequest, res: Response) => {
       return
     }
 
-    const data: Stock = await response.json()
-    await db.UserHistory.create({
-      data: {
-        ...data,
-        user: {
-          connect: { id: userId }
-        }
-      }
-    })
+    const data: UserHistoryResponse = await response.json()
+    await db.UserHistory.addHistory(userId, data)
 
     res.json(data)
   } catch (error: any) {

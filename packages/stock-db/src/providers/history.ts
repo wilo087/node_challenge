@@ -43,8 +43,20 @@ const getHistory = async (userId: number, limit: number = 20): Promise<UserHisto
   return data
 }
 
+const addHistory = async (userId: number, data: UserHistoryResponse): Promise<void> => {
+  await client.userHistory.create({
+    data: {
+      ...data,
+      user: {
+        connect: { id: userId }
+      }
+    }
+  })
+}
+
 export const provider = {
   ...client.userHistory,
   getStats,
-  getHistory
+  getHistory,
+  addHistory
 }
