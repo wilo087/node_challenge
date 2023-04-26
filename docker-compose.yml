@@ -28,7 +28,19 @@ services:
       - /app/node_modules/
     ports:
       - 3000:3000
-    # platform: "linux/amd64"
+
+  stock.api:
+    container_name: stock_api
+    networks:
+      - stock_net
+    build:
+      context: .
+      dockerfile: ./docker/api/Dockerfile.dev
+    volumes:
+      - .:/app
+      - /app/node_modules/
+    # ports:
+    #   - 3001:3001
 
 networks:
   stock_net:
