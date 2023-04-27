@@ -50,7 +50,7 @@ curl --location 'http://localhost:3000/register' --header 'Content-Type: applica
 # Don't forget to save the password
 ```
 
-### login - GET
+### /login - GET
 ```sh
 curl --location 'http://localhost:3000/login' --header 'Content-Type: application/json' \
 --data-raw '{
