@@ -1,13 +1,12 @@
-import express, { Response } from 'express'
-import { config } from '../config'
-import { auth } from '../middleware/auth'
-import { AuthenticatedRequest } from '../types'
+import express, { Request, Response } from 'express'
 import db from '@stock/db'
 import { UserHistoryResponse } from '@stock/db/types'
+import { config } from '../config'
+import { auth } from '../middleware/auth'
+
 const router = express.Router()
 
-router.get('/:code', auth, async (req: AuthenticatedRequest, res: Response) => {
-  const userId = req.user?.userId as number
+router.get('/:code', auth, async (req: Request, res: Response) => {
   const { code } = req.params
 
   try {
@@ -19,7 +18,7 @@ router.get('/:code', auth, async (req: AuthenticatedRequest, res: Response) => {
     }
 
     const data: UserHistoryResponse = await response.json()
-    await db.UserHistory.addHistory(userId, data)
+    await db.UserHistory.addHistory(res.locals.user.id, data)
 
     res.json(data)
   } catch (error: any) {

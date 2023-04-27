@@ -1,14 +1,11 @@
-import express, { Response } from 'express'
-import { auth } from '../middleware/auth'
-import { AuthenticatedRequest } from '../types'
+import express, { Request, Response } from 'express'
 import db from '@stock/db'
+import { auth } from '../middleware/auth'
 
 const router = express.Router()
 
-router.get('/', auth, (req: AuthenticatedRequest, res: Response) => {
-  const { userRole } = req.user ?? { userRole: 'user' }
-
-  if (userRole !== 'admin') {
+router.get('/', auth, (_req: Request, res: Response) => {
+  if (res.locals.user.role !== 'admin') {
     res.status(401).json({ message: 'Unauthorized' })
     return
   }

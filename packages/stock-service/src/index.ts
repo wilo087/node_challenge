@@ -1,7 +1,6 @@
 import express, { Request, Response, NextFunction } from 'express'
 import createError, { HttpError } from 'http-errors'
 import { home, register, stock, history, stats, auth } from './routes'
-
 const app = express()
 app.use(express.json())
 
@@ -13,7 +12,6 @@ app.use('/history', history)
 app.use('/stats', stats)
 
 // TODO: Implement morgan to logger requests
-
 // Catch 404 and forward to error handler
 app.use((_req, _res, next) => next(createError(404)))
 app.use((err: HttpError, req: Request, res: Response, _next: NextFunction) => {

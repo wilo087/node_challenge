@@ -5,7 +5,3 @@ export interface UserJwtPayload extends JwtPayload {
   userId: number;
   userRole: Role;
 }
-
-export interface AuthenticatedRequest extends Request {
-  user?: UserJwtPayload;
-}

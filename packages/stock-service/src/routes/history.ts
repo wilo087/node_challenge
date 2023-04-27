@@ -1,14 +1,11 @@
-import express, { Response } from 'express'
-import { auth } from '../middleware/auth'
-import { AuthenticatedRequest } from '../types'
+import express, { Request, Response } from 'express'
 import db from '@stock/db'
+import { auth } from '../middleware/auth'
 
 const router = express.Router()
 
-router.get('/', auth, (req: AuthenticatedRequest, res: Response) => {
-  const { userId } = req.user ?? { userId: 0 }
-
-  db.UserHistory.getHistory(userId)
+router.get('/', auth, (_req: Request, res: Response) => {
+  db.UserHistory.getHistory(res.locals.user.id)
     .then(history => res.json(history))
     .catch(_err => res.status(500).json({ message: 'Internal server error' }))
 })

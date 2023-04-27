@@ -3,7 +3,7 @@ import db from '@stock/db'
 
 const router = express.Router()
 
-router.post('/', async (req: Request, res: Response) => {
+router.post('/', (req: Request, res: Response) => {
   const { email, role } = req.body
 
   db.User.findOrCreate(email, role)
