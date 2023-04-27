@@ -13,7 +13,7 @@ router.get('/:code', auth, async (req: Request, res: Response) => {
     const response = await fetch(`${config.stockApiUrl}/stock/${code}`)
 
     if (response.status === 404) {
-      res.status(404).json({ message: 'Stock not found, here is the stock list available https://stooq.com/t/?i=518' })
+      res.status(404).json({ message: 'Stock not found, here is the available stock list https://stooq.com/t/?i=518' })
       return
     }
 

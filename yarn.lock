@@ -3562,11 +3562,6 @@ expect@^29.0.0, expect@^29.5.0:
     jest-message-util "^29.5.0"
     jest-util "^29.5.0"
 
-express-http-context2@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/express-http-context2/-/express-http-context2-1.0.0.tgz#58cd9fb0d233739e0dcd7aabb766d1dc74522d77"
-  integrity sha512-xdukoNNpWcuMn5ZJcjDe/tA+2A96rQ1MyAB/oWUU7qP15Tkz3txQyFsw/QG8YgRzTJ1sNAA8Bdq0o5b/1Y4zLA==
-
 express@4.18.2:
   version "4.18.2"
   resolved "https://registry.yarnpkg.com/express/-/express-4.18.2.tgz#3fabe08296e930c796c19e3c516979386ba9fd59"
