@@ -1,0 +1,50 @@
+version: '3.9'
+
+services:
+  stock.postgres:
+    container_name: stock_postgres
+    networks:
+      - jobsity_stock_net
+    image: postgres:14.1-alpine3.14
+    # volumes:
+    #   - ./_cache/postgres:/var/lib/postgresql/data
+    environment:
+      POSTGRES_PASSWORD: 'passwd'
+      POSTGRES_USER: postgres
+      POSTGRES_DB: 'jobsity_stock'
+      PGDATA: '/var/lib/postgresql/data'
+    ports:
+      - 5432:5432
+
+  stock.service:
+    container_name: stock_service
+    networks:
+      - jobsity_stock_net
+    build:
+      context: .
+      dockerfile: ./docker/service/Dockerfile.dev
+    image: jobsity_stock_service
+    volumes:
+      - .:/app
+      - /app/node_modules/
+    ports:
+      - 3000:3000
+    depends_on:
+      - stock.postgres
+      - stock.api
+
+  stock.api:
+    container_name: stock_api
+    networks:
+      - jobsity_stock_net
+    build:
+      context: .
+      dockerfile: ./docker/api/Dockerfile.dev
+    image: jobsity_stock_api
+    volumes:
+      - .:/app
+      - /app/node_modules/
+
+networks:
+  jobsity_stock_net:
+    name: jobsity_stock_net

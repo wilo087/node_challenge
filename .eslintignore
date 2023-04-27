@@ -1,0 +1,5 @@
+**/*.js
+**/*.d.ts
+**/*.test.ts
+**/*.js.map
+generated.ts
